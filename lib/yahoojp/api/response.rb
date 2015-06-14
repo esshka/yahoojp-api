@@ -6,7 +6,8 @@ module YahooJp
       @response =response
       body = @response.body
       if format == "json"
-        body = body[body.index('(')+1..body.index(')')-1]
+        # body = body[body.index('(')+1..body.index(')')-1]
+        body = body.match(/{.+}/)[0]
         @body = JSON.parse(body)
       else
         @body = Hash.from_xml(body)
